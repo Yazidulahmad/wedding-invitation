@@ -1,0 +1,646 @@
+:root {
+    --primary-color: #8B0000;
+    --secondary-color: #A52A2A;
+    --accent-color: #FF6347;
+    --text-color: #FFFFFF;
+    --light-color: #f8f9fa;
+    --dark-color: #1A0000;
+    --gold-color: #D4AF37;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Background GIF untuk seluruh halaman */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://github.com/Yazidulahmad/Halaman-cover/raw/refs/heads/main/IMG_3038.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Cover Front Styles */
+.cover-front {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: 
+        linear-gradient(135deg, rgba(139, 0, 0, 0.7) 0%, rgba(26, 0, 0, 0.8) 100%),
+        url('https://github.com/Yazidulahmad/Halaman-cover/raw/refs/heads/main/IMG_3038.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+    transition: transform 1s ease-in-out;
+    padding: 20px;
+    color: white;
+}
+
+.cover-front.hidden {
+    transform: translateY(-100%);
+}
+
+.cover-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.cover-subtitle {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: var(--gold-color);
+}
+
+.cover-couple {
+    margin: 30px 0;
+}
+
+.cover-name {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: white;
+}
+
+.cover-parents {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #e0e0e0;
+}
+
+.open-invitation-btn {
+    margin-top: 40px;
+    padding: 15px 40px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid var(--gold-color);
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.open-invitation-btn:hover {
+    background-color: var(--gold-color);
+    color: var(--dark-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.open-invitation-btn:after {
+    content: "→";
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.open-invitation-btn:hover:after {
+    transform: translateY(-50%) translateX(5px);
+}
+
+/* Main Content Styles */
+.main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.main-content.visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Section Styles dengan Background GIF presisi */
+.wedding-section {
+    min-height: 100vh;
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background GIF untuk setiap section dengan presisi */
+.wedding-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://github.com/Yazidulahmad/Halaman-cover/raw/refs/heads/main/IMG_3038.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.section-content {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+}
+
+/* Typography tanpa shadow */
+.wedding-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.wedding-subtitle {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--gold-color);
+    margin-bottom: 20px;
+}
+
+.wedding-heading {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.wedding-text {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+/* Couple Names */
+.couple-names {
+    margin: 40px 0;
+    padding: 30px 0;
+    border-top: 2px solid var(--gold-color);
+    border-bottom: 2px solid var(--gold-color);
+}
+
+.name {
+    font-family: "Playfair Display", serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold-color);
+    margin: 15px 0;
+}
+
+.parent-names {
+    font-size: 1rem;
+    color: #e0e0e0;
+    margin: 10px 0;
+    font-style: italic;
+}
+
+/* Buttons */
+.wedding-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wedding-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Countdown */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.countdown-item {
+    text-align: center;
+    min-width: 100px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold-color);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    border: 2px solid var(--gold-color);
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+/* Envelope */
+.envelope-container {
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid var(--gold-color);
+}
+
+/* Swipe Gallery Styles */
+.gallery-container {
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.swipe-gallery {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gallery-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.gallery-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.gallery-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-dot.active {
+    background-color: var(--gold-color);
+    transform: scale(1.3);
+}
+
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.gallery-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.15);
+}
+
+.gallery-arrow.prev {
+    left: 20px;
+}
+
+.gallery-arrow.next {
+    right: 20px;
+}
+
+.swipe-hint {
+    text-align: center;
+    margin-top: 20px;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+/* Form Styles */
+.guest-form {
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--gold-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: white;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-family: inherit;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold-color);
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Messages */
+.messages-container {
+    margin-top: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--gold-color);
+}
+
+.message {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
+}
+
+.message:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.message-name {
+    font-weight: 700;
+    color: var(--gold-color);
+    margin-bottom: 5px;
+}
+
+.message-text {
+    margin-top: 5px;
+    color: white;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #b0b0b0;
+    margin-top: 5px;
+}
+
+/* Map */
+.map-container {
+    margin: 30px 0;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gold-color);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Navigation */
+.wedding-navigation {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 50px;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background-color: var(--gold-color);
+    transform: scale(1.3);
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 100;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.music-player:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.play-icon {
+    color: white;
+    font-size: 24px;
+}
+
+.music-player.playing .play-icon::before {
+    content: "❚❚";
+}
+
+.music-player:not(.playing) .play-icon::before {
+    content: "▶";
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cover-title {
+        font-size: 2.5rem;
+    }
+    
+    .cover-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .cover-name {
+        font-size: 2rem;
+    }
+    
+    .wedding-title {
+        font-size: 2.5rem;
+    }
+    
+    .wedding-subtitle {
+        font-size: 2rem;
+    }
+    
+    .name {
+        font-size: 2rem;
+    }
+    
+    .countdown-number {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .envelope-container, .guest-form {
+        padding: 20px;
+    }
+    
+    .swipe-gallery {
+        height: 500px;
+    }
+    
+    .gallery-arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+    }
+    
+    .gallery-arrow.prev {
+        left: 10px;
+    }
+    
+    .gallery-arrow.next {
+        right: 10px;
+    }
+    
+    .gallery-dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 6px;
+    }
+    
+    .wedding-navigation {
+        bottom: 20px;
+    }
+    
+    .music-player {
+        bottom: 80px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .play-icon {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .swipe-gallery {
+        height: 400px;
+    }
+    
+    .section-content {
+        padding: 20px;
+    }
+}

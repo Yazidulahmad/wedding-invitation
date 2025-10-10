@@ -1,0 +1,404 @@
+// Gallery Data
+const galleryImages = [
+    {
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+    }
+];
+
+// Swipe Gallery Functionality
+let currentSlide = 0;
+
+function initializeGallery() {
+    const galleryTrack = document.getElementById('galleryTrack');
+    const galleryNav = document.getElementById('galleryNav');
+    
+    // Clear existing content
+    galleryTrack.innerHTML = '';
+    galleryNav.innerHTML = '';
+    
+    // Create slides
+    galleryImages.forEach((image, index) => {
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = 'gallery-slide';
+        
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = "Foto Prewedding";
+        img.loading = "lazy";
+        
+        slide.appendChild(img);
+        galleryTrack.appendChild(slide);
+        
+        // Create navigation dot
+        const dot = document.createElement('div');
+        dot.className = 'gallery-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.setAttribute('data-index', index);
+        galleryNav.appendChild(dot);
+        
+        // Add click event to dot
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+        });
+    });
+    
+    // Add event listeners to arrows
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        prevSlide();
+    });
+    
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        nextSlide();
+    });
+    
+    // Add swipe functionality
+    setupSwipeEvents();
+    
+    // Auto slide every 5 seconds
+    setInterval(() => {
+        nextSlide();
+    }, 5000);
+}
+
+function goToSlide(index) {
+    const galleryTrack = document.getElementById('galleryTrack');
+    const dots = document.querySelectorAll('.gallery-dot');
+    
+    // Update current slide
+    currentSlide = index;
+    
+    // Move track
+    galleryTrack.style.transform = `translateX(-${index * 100}%)`;
+    
+    // Update dots
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+    } else {
+        goToSlide(galleryImages.length - 1); // Loop to last slide
+    }
+}
+
+function nextSlide() {
+    if (currentSlide < galleryImages.length - 1) {
+        goToSlide(currentSlide + 1);
+    } else {
+        goToSlide(0); // Loop to first slide
+    }
+}
+
+function setupSwipeEvents() {
+    const gallery = document.getElementById('swipeGallery');
+    let startX = 0;
+    let endX = 0;
+    
+    gallery.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+    
+    gallery.addEventListener('touchmove', (e) => {
+        endX = e.touches[0].clientX;
+    });
+    
+    gallery.addEventListener('touchend', () => {
+        const diffX = startX - endX;
+        const minSwipeDistance = 50; // Minimum distance for a swipe
+        
+        if (Math.abs(diffX) > minSwipeDistance) {
+            if (diffX > 0) {
+                // Swipe left - next slide
+                nextSlide();
+            } else {
+                // Swipe right - previous slide
+                prevSlide();
+            }
+        }
+    });
+    
+    // Also support mouse events for desktop
+    gallery.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        gallery.addEventListener('mousemove', onMouseMove);
+        gallery.addEventListener('mouseup', onMouseUp);
+    });
+    
+    function onMouseMove(e) {
+        endX = e.clientX;
+    }
+    
+    function onMouseUp() {
+        const diffX = startX - endX;
+        const minSwipeDistance = 50;
+        
+        if (Math.abs(diffX) > minSwipeDistance) {
+            if (diffX > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+        
+        gallery.removeEventListener('mousemove', onMouseMove);
+        gallery.removeEventListener('mouseup', onMouseUp);
+    }
+}
+
+// Cover Front Functionality
+function openInvitation() {
+    const coverFront = document.getElementById('coverFront');
+    const mainContent = document.getElementById('mainContent');
+    
+    // Add hidden class to cover with transition
+    coverFront.classList.add('hidden');
+    
+    // Show main content after a delay
+    setTimeout(() => {
+        mainContent.classList.add('visible');
+        // Scroll to top of main content
+        window.scrollTo(0, 0);
+        
+        // Auto-play music when opening invitation
+        const music = document.getElementById('weddingMusic');
+        const player = document.getElementById('musicPlayer');
+        
+        // Set volume
+        music.volume = 0.5;
+        
+        // Play music
+        music.play().then(() => {
+            player.classList.add('playing');
+        }).catch(e => {
+            console.log("Autoplay prevented:", e);
+            // If autoplay is blocked, show play button
+            player.style.display = 'flex';
+        });
+        
+    }, 800);
+    
+    // Initialize main content functionality
+    initializeMainContent();
+}
+
+// Initialize main content functionality
+function initializeMainContent() {
+    // Initialize gallery
+    initializeGallery();
+    
+    // Countdown timer
+    function updateCountdown() {
+        const weddingDate = new Date('December 21, 2025 08:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Scroll to section
+    function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Create navigation dots
+    function createNavigation() {
+        const sections = document.querySelectorAll('.wedding-section');
+        const navContainer = document.getElementById('navigation');
+        
+        sections.forEach((section, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            dot.onclick = () => scrollToSection(section.id);
+            navContainer.appendChild(dot);
+        });
+        
+        // Set first dot as active
+        navContainer.children[0].classList.add('active');
+    }
+
+    // Handle scroll to update active dot
+    function handleScroll() {
+        const sections = document.querySelectorAll('.wedding-section');
+        const navDots = document.querySelectorAll('.nav-dot');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                currentSection = section.id;
+            }
+        });
+        
+        navDots.forEach(dot => {
+            dot.classList.remove('active');
+            if (dot.onclick.toString().includes(currentSection)) {
+                dot.classList.add('active');
+            }
+        });
+    }
+
+    // Fungsi untuk mendapatkan nama dari URL
+    function getGuestNameFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return decodeURIComponent(urlParams.get('nama') || 'Tamu Undangan');
+    }
+
+    // Fungsi untuk mempersonalisasi undangan
+    function personalizeInvitation() {
+        const guestName = getGuestNameFromURL();
+        
+        // Personalisasi semua bagian yang diperlukan
+        document.getElementById('personalGreeting').textContent = 
+            `Kepada Yth. ${guestName}, kami mengundang Anda untuk hadir dalam acara pernikahan kami`;
+        
+        document.getElementById('openingGreeting').textContent = 
+            `Kepada Yth. ${guestName}, dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami bermaksud menyelenggarakan pernikahan putra-putri kami:`;
+        
+        document.getElementById('invitationGreeting').textContent = 
+            `Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu.`;
+        
+        document.getElementById('closingGreeting').textContent = 
+            `Atas kehadiran dan doa restu Anda, kami mengucapkan terima kasih yang sebesar-besarnya.`;
+    }
+
+    // Fungsi untuk mengirim ucapan
+    function sendWishes() {
+        const name = document.getElementById('name').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (name && message) {
+            // Simpan ke localStorage untuk demo
+            const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+            wishes.push({
+                name: name,
+                message: message,
+                timestamp: new Date().toLocaleString('id-ID')
+            });
+            localStorage.setItem('wishes', JSON.stringify(wishes));
+            
+            document.getElementById('name').value = '';
+            document.getElementById('message').value = '';
+            alert('Ucapan Anda telah terkirim! Terima kasih.');
+            displayWishes();
+        } else {
+            alert('Silakan isi nama dan ucapan Anda');
+        }
+    }
+
+    // Fungsi untuk menampilkan ucapan
+    function displayWishes() {
+        const messagesContainer = document.getElementById('messages-container');
+        const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+        
+        messagesContainer.innerHTML = '';
+        
+        wishes.forEach(wish => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            messageDiv.innerHTML = `
+                <div class="message-name">${wish.name || 'Tamu'}</div>
+                <div class="message-text">${wish.message}</div>
+                <div class="message-time">${wish.timestamp}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+        });
+        
+        // Scroll ke bawah
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Music Player Control
+    function setupMusicPlayer() {
+        const music = document.getElementById('weddingMusic');
+        const player = document.getElementById('musicPlayer');
+        
+        // Toggle play/pause on click
+        player.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                player.classList.add('playing');
+            } else {
+                music.pause();
+                player.classList.remove('playing');
+            }
+        });
+        
+        // Visual feedback when music is playing
+        music.addEventListener('play', () => {
+            player.classList.add('playing');
+        });
+        
+        music.addEventListener('pause', () => {
+            player.classList.remove('playing');
+        });
+        
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                music.pause();
+                player.classList.remove('playing');
+            }
+        });
+    }
+
+    // Initialize main content
+    createNavigation();
+    displayWishes();
+    setupMusicPlayer();
+    
+    // Personalisasi undangan saat pertama kali dimuat
+    personalizeInvitation();
+    
+    // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Handle scroll events
+    window.addEventListener('scroll', handleScroll);
+    
+    // Event listener untuk form ucapan
+    document.getElementById('sendWishesBtn').addEventListener('click', sendWishes);
+}
+
+// Initialize cover front
+document.addEventListener('DOMContentLoaded', () => {
+    // Button click event
+    document.getElementById('openInvitationBtn').addEventListener('click', openInvitation);
+    
+    // Keyboard event for accessibility
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            openInvitation();
+        }
+    });
+});

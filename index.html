@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Ahmad Yazidul Jihad & Hartini</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Cover Front -->
+    <div class="cover-front" id="coverFront">
+        <h1 class="cover-title">Undangan Pernikahan</h1>
+        <p class="cover-subtitle">The Wedding Celebration</p>
+        
+        <div class="cover-couple">
+            <div class="cover-name">Ahmad Yazidul Jihad</div>
+            <div class="cover-parents">Bpk. Suhada (Alm) & Ibu Didah Saidah</div>
+            <div style="font-size: 2rem; margin: 20px 0; color: var(--gold-color);">&</div>
+            <div class="cover-name">Hartini</div>
+            <div class="cover-parents">Bpk. Supriadi & Ibu Maesaroh - Ibu Sumarni</div>
+        </div>
+        
+        <button class="open-invitation-btn" id="openInvitationBtn">Buka Undangan</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Music Player -->
+        <div class="music-player" id="musicPlayer">
+            <div class="play-icon"></div>
+            <audio id="weddingMusic" loop>
+                <source src="https://cdn.jsdelivr.net/gh/yazidulahmad/nikah-musik@main/sumpahdanmati.mp3" type="audio/mpeg">
+                Browser Anda tidak mendukung pemutar audio.
+            </audio>
+        </div>
+
+        <!-- Cover Section -->
+        <section class="wedding-section" id="cover">
+            <div class="section-content">
+                <h1 class="wedding-title">Undangan Pernikahan</h1>
+                <div class="couple-names">
+                    <div class="name">Ahmad Yazidul Jihad</div>
+                    <div class="parent-names">Bpk. Suhada (Alm) & Ibu Didah Saidah</div>
+                    <div style="font-size: 2rem; margin: 20px 0; color: var(--gold-color);">&</div>
+                    <div class="name">Hartini</div>
+                    <div class="parent-names">Bpk. Supriadi & Ibu Maesaroh - Ibu Sumarni</div>
+                </div>
+                <p class="wedding-text" id="personalGreeting">Kami mengundang Anda untuk hadir dalam acara pernikahan kami</p>
+            </div>
+        </section>
+
+        <!-- Opening Section -->
+        <section class="wedding-section" id="opening">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
+                <p class="wedding-text" id="openingGreeting">Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+                <div class="couple-names" style="margin: 20px 0;">
+                    <div class="name">Ahmad Yazidul Jihad</div>
+                    <div class="name">Hartini</div>
+                </div>
+                <p class="wedding-text">Semoga dengan ikatan pernikahan ini, kami dapat membangun keluarga yang sakinah, mawaddah, wa rahmah.</p>
+            </div>
+        </section>
+
+        <!-- Invitation Section -->
+        <section class="wedding-section" id="invitation">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Informasi Acara</h2>
+                <div style="margin: 30px 0;">
+                    <h3 class="wedding-heading">Akad Nikah</h3>
+                    <p class="wedding-text">09:00 WIB s/d Selesai</p>
+                    <p class="wedding-text">21 Desember 2025</p>
+                </div>
+                <div style="margin: 30px 0;">
+                    <h3 class="wedding-heading">Resepsi Pernikahan</h3>
+                    <p class="wedding-text">10:00 WIB s/d Selesai</p>
+                    <p class="wedding-text">21 Desember 2025</p>
+                </div>
+                <p class="wedding-text" id="invitationGreeting">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="wedding-section" id="gallery">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Galeri Prewedding</h2>
+                <p class="wedding-text">Kenangan indah kami sebelum hari pernikahan</p>
+                
+                <div class="gallery-container">
+                    <div class="swipe-gallery" id="swipeGallery">
+                        <div class="gallery-track" id="galleryTrack">
+                            <!-- Slides will be added by JavaScript -->
+                        </div>
+                        <button class="gallery-arrow prev" id="prevBtn">&#10094;</button>
+                        <button class="gallery-arrow next" id="nextBtn">&#10095;</button>
+                    </div>
+                    <div class="gallery-nav" id="galleryNav">
+                        <!-- Dots will be added by JavaScript -->
+                    </div>
+                    <p class="swipe-hint">Gunakan tombol panah atau geser untuk melihat foto lainnya</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Address Section -->
+        <section class="wedding-section" id="address">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Lokasi Acara</h2>
+                <p class="wedding-text">Desa Sukapura, Kec. Rawamerta</p>
+                <p class="wedding-text">Kab. Karawang</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d107.3822774!3d-6.5017598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzAnMDYuMyJTIDEwN8KwMjInNTYuMiJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <a href="https://maps.app.goo.gl/Ve1j7jKGvhfn4yP86?g_st=ic" class="wedding-btn" target="_blank">Buka di Google Maps</a>
+            </div>
+        </section>
+
+        <!-- Envelope Section -->
+        <section class="wedding-section" id="envelope">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Amplop Digital</h2>
+                <div class="envelope-container">
+                    <p class="wedding-text">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
+                    <p class="wedding-text">Jika berkenan, Anda dapat memberikan hadiah secara digital melalui:</p>
+                    <div style="margin: 20px 0;">
+                        <p class="wedding-text"><strong>Bank Mandiri</strong></p>
+                        <p class="wedding-text">1234 5678 9012 3456</p>
+                        <p class="wedding-text">a.n. Ahmad Yazidul Jihad</p>
+                    </div>
+                    <p class="wedding-text">Terima kasih atas segala kebaikan dan perhatiannya.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Section -->
+        <section class="wedding-section" id="closing">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Penutup</h2>
+                <p class="wedding-text" id="closingGreeting">Atas kehadiran dan doa restunya, kami mengucapkan terima kasih yang sebesar-besarnya.</p>
+                <div style="margin: 30px 0;">
+                    <p class="wedding-text">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                </div>
+                <div class="couple-names" style="margin: 30px 0;">
+                    <div class="name">Yazid & Atin</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="wedding-section" id="countdown">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Menuju Hari Bahagia</h2>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Hari</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Jam</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Menit</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Detik</div>
+                    </div>
+                </div>
+                <p class="wedding-text">21 Desember 2025</p>
+            </div>
+        </section>
+
+        <!-- Wishes Section -->
+        <section class="wedding-section" id="wishes">
+            <div class="section-content">
+                <h2 class="wedding-subtitle">Ucapan & Doa</h2>
+                <p class="wedding-text">Berikan ucapan dan doa untuk kami</p>
+                
+                <div class="guest-form">
+                    <div class="form-group">
+                        <label for="name">Nama Anda</label>
+                        <input type="text" id="name" placeholder="Nama Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ucapan & Doa</label>
+                        <textarea id="message" placeholder="Tulis ucapan dan doa untuk kami"></textarea>
+                    </div>
+                    <button class="wedding-btn" id="sendWishesBtn">Kirim Ucapan</button>
+                </div>
+                
+                <div class="messages-container" id="messages-container">
+                    <!-- Messages will appear here -->
+                </div>
+            </div>
+        </section>
+
+        <div class="wedding-navigation" id="navigation">
+            <!-- Navigation dots will be added here by JavaScript -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
