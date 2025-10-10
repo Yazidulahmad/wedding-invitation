@@ -20,6 +20,11 @@ const galleryImages = [
     }
 ];
 
+// Initialize Feather Icons
+function initializeFeatherIcons() {
+    feather.replace();
+}
+
 // Swipe Gallery Functionality
 let currentSlide = 0;
 
@@ -201,6 +206,9 @@ function openInvitation() {
 
 // Initialize main content functionality
 function initializeMainContent() {
+    // Initialize Feather Icons
+    initializeFeatherIcons();
+    
     // Initialize gallery
     initializeGallery();
     
@@ -325,9 +333,15 @@ function initializeMainContent() {
             messageDiv.className = 'message';
             
             messageDiv.innerHTML = `
-                <div class="message-name">${wish.name || 'Tamu'}</div>
+                <div class="message-name">
+                    <i data-feather="user" class="text-icon"></i>
+                    ${wish.name || 'Tamu'}
+                </div>
                 <div class="message-text">${wish.message}</div>
-                <div class="message-time">${wish.timestamp}</div>
+                <div class="message-time">
+                    <i data-feather="clock" class="text-icon"></i>
+                    ${wish.timestamp}
+                </div>
             `;
             
             messagesContainer.appendChild(messageDiv);
@@ -335,6 +349,9 @@ function initializeMainContent() {
         
         // Scroll ke bawah
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        // Replace icons in new messages
+        feather.replace();
     }
 
     // Music Player Control
@@ -392,6 +409,9 @@ function initializeMainContent() {
 
 // Initialize cover front
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Feather Icons for cover
+    initializeFeatherIcons();
+    
     // Button click event
     document.getElementById('openInvitationBtn').addEventListener('click', openInvitation);
     
