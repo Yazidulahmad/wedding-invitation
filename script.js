@@ -20,6 +20,19 @@ const galleryImages = [
     }
 ];
 
+// Navigation Configuration
+const navigationConfig = [
+    { id: 'cover', icon: 'home', label: 'Cover' },
+    { id: 'opening', icon: 'book-open', label: 'Pembuka' },
+    { id: 'invitation', icon: 'calendar', label: 'Acara' },
+    { id: 'gallery', icon: 'image', label: 'Galeri' },
+    { id: 'address', icon: 'map-pin', label: 'Lokasi' },
+    { id: 'envelope', icon: 'gift', label: 'Amplop' },
+    { id: 'closing', icon: 'heart', label: 'Penutup' },
+    { id: 'countdown', icon: 'clock', label: 'Countdown' },
+    { id: 'wishes', icon: 'message-circle', label: 'Ucapan' }
+];
+
 // Initialize Feather Icons
 function initializeFeatherIcons() {
     feather.replace();
@@ -234,26 +247,36 @@ function initializeMainContent() {
         document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Create navigation dots
+    // Create navigation with icons
     function createNavigation() {
-        const sections = document.querySelectorAll('.wedding-section');
         const navContainer = document.getElementById('navigation');
-        
-        sections.forEach((section, index) => {
-            const dot = document.createElement('div');
-            dot.className = 'nav-dot';
-            dot.onclick = () => scrollToSection(section.id);
-            navContainer.appendChild(dot);
+        navContainer.innerHTML = '';
+
+        navigationConfig.forEach((item) => {
+            const navItem = document.createElement('div');
+            navItem.className = 'nav-item';
+            navItem.setAttribute('data-section', item.id);
+            
+            navItem.innerHTML = `
+                <i data-feather="${item.icon}" class="nav-icon"></i>
+                <span class="nav-label">${item.label}</span>
+            `;
+            
+            navItem.onclick = () => scrollToSection(item.id);
+            navContainer.appendChild(navItem);
         });
+
+        // Replace icons
+        feather.replace();
         
-        // Set first dot as active
+        // Set first item as active
         navContainer.children[0].classList.add('active');
     }
 
-    // Handle scroll to update active dot
+    // Handle scroll to update active navigation item
     function handleScroll() {
         const sections = document.querySelectorAll('.wedding-section');
-        const navDots = document.querySelectorAll('.nav-dot');
+        const navItems = document.querySelectorAll('.nav-item');
         let currentSection = '';
         
         sections.forEach(section => {
@@ -265,10 +288,10 @@ function initializeMainContent() {
             }
         });
         
-        navDots.forEach(dot => {
-            dot.classList.remove('active');
-            if (dot.onclick.toString().includes(currentSection)) {
-                dot.classList.add('active');
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('data-section') === currentSection) {
+                item.classList.add('active');
             }
         });
     }
