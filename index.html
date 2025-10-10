@@ -6,6 +6,8 @@
     <title>Undangan Pernikahan Ahmad Yazidul Jihad & Hartini</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     
@@ -22,14 +24,17 @@
             <div class="cover-parents">Bpk. Supriadi & Ibu Maesaroh - Ibu Sumarni</div>
         </div>
         
-        <button class="open-invitation-btn" id="openInvitationBtn">Buka Undangan</button>
+        <button class="open-invitation-btn" id="openInvitationBtn">
+            <i data-feather="heart" class="btn-icon"></i>
+            Buka Undangan
+        </button>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <!-- Music Player -->
         <div class="music-player" id="musicPlayer">
-            <div class="play-icon"></div>
+            <i data-feather="play" class="play-icon"></i>
             <audio id="weddingMusic" loop>
                 <source src="https://cdn.jsdelivr.net/gh/yazidulahmad/nikah-musik@main/sumpahdanmati.mp3" type="audio/mpeg">
                 Browser Anda tidak mendukung pemutar audio.
@@ -93,13 +98,21 @@
                         <div class="gallery-track" id="galleryTrack">
                             <!-- Slides will be added by JavaScript -->
                         </div>
-                        <button class="gallery-arrow prev" id="prevBtn">&#10094;</button>
-                        <button class="gallery-arrow next" id="nextBtn">&#10095;</button>
+                        <button class="gallery-arrow prev" id="prevBtn">
+                            <i data-feather="chevron-left"></i>
+                        </button>
+                        <button class="gallery-arrow next" id="nextBtn">
+                            <i data-feather="chevron-right"></i>
+                        </button>
                     </div>
                     <div class="gallery-nav" id="galleryNav">
                         <!-- Dots will be added by JavaScript -->
                     </div>
-                    <p class="swipe-hint">Gunakan tombol panah atau geser untuk melihat foto lainnya</p>
+                    <p class="swipe-hint">
+                        <i data-feather="arrow-left" class="hint-icon"></i>
+                        Geser untuk melihat foto lainnya
+                        <i data-feather="arrow-right" class="hint-icon"></i>
+                    </p>
                 </div>
             </div>
         </section>
@@ -113,7 +126,10 @@
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.952912260219!2d107.3822774!3d-6.5017598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzAnMDYuMyJTIDEwN8KwMjInNTYuMiJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <a href="https://maps.app.goo.gl/Ve1j7jKGvhfn4yP86?g_st=ic" class="wedding-btn" target="_blank">Buka di Google Maps</a>
+                <a href="https://maps.app.goo.gl/Ve1j7jKGvhfn4yP86?g_st=ic" class="wedding-btn" target="_blank">
+                    <i data-feather="map-pin" class="btn-icon"></i>
+                    Buka di Google Maps
+                </a>
             </div>
         </section>
 
@@ -125,7 +141,10 @@
                     <p class="wedding-text">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
                     <p class="wedding-text">Jika berkenan, Anda dapat memberikan hadiah secara digital melalui:</p>
                     <div style="margin: 20px 0;">
-                        <p class="wedding-text"><strong>Bank Mandiri</strong></p>
+                        <p class="wedding-text">
+                            <i data-feather="credit-card" class="text-icon"></i>
+                            <strong>Bank Mandiri</strong>
+                        </p>
                         <p class="wedding-text">1234 5678 9012 3456</p>
                         <p class="wedding-text">a.n. Ahmad Yazidul Jihad</p>
                     </div>
@@ -170,7 +189,10 @@
                         <div class="countdown-label">Detik</div>
                     </div>
                 </div>
-                <p class="wedding-text">21 Desember 2025</p>
+                <p class="wedding-text">
+                    <i data-feather="calendar" class="text-icon"></i>
+                    21 Desember 2025
+                </p>
             </div>
         </section>
 
@@ -182,14 +204,23 @@
                 
                 <div class="guest-form">
                     <div class="form-group">
-                        <label for="name">Nama Anda</label>
+                        <label for="name">
+                            <i data-feather="user" class="label-icon"></i>
+                            Nama Anda
+                        </label>
                         <input type="text" id="name" placeholder="Nama Anda">
                     </div>
                     <div class="form-group">
-                        <label for="message">Ucapan & Doa</label>
+                        <label for="message">
+                            <i data-feather="message-circle" class="label-icon"></i>
+                            Ucapan & Doa
+                        </label>
                         <textarea id="message" placeholder="Tulis ucapan dan doa untuk kami"></textarea>
                     </div>
-                    <button class="wedding-btn" id="sendWishesBtn">Kirim Ucapan</button>
+                    <button class="wedding-btn" id="sendWishesBtn">
+                        <i data-feather="send" class="btn-icon"></i>
+                        Kirim Ucapan
+                    </button>
                 </div>
                 
                 <div class="messages-container" id="messages-container">
