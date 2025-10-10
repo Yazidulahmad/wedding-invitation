@@ -110,6 +110,9 @@ body::before {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .open-invitation-btn:hover {
@@ -238,7 +241,9 @@ body::before {
 
 /* Buttons */
 .wedding-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 15px 30px;
     background-color: var(--primary-color);
     color: white;
@@ -397,6 +402,10 @@ body::before {
     margin-top: 20px;
     color: #e0e0e0;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Form Styles */
@@ -413,7 +422,9 @@ body::before {
 }
 
 .form-group label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 8px;
     font-weight: 600;
     color: white;
@@ -548,15 +559,46 @@ body::before {
 
 .play-icon {
     color: white;
-    font-size: 24px;
+    width: 24px;
+    height: 24px;
 }
 
-.music-player.playing .play-icon::before {
+.music-player.playing .play-icon {
+    display: none;
+}
+
+.music-player.playing::after {
     content: "❚❚";
+    color: white;
+    font-size: 18px;
 }
 
-.music-player:not(.playing) .play-icon::before {
-    content: "▶";
+.music-player:not(.playing)::after {
+    display: none;
+}
+
+/* Icon Styles */
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.text-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    color: var(--gold-color);
+}
+
+.label-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.hint-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--gold-color);
 }
 
 /* Responsive */
@@ -631,7 +673,13 @@ body::before {
     }
     
     .play-icon {
-        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .btn-icon {
+        width: 16px;
+        height: 16px;
     }
 }
 
@@ -642,5 +690,10 @@ body::before {
     
     .section-content {
         padding: 20px;
+    }
+
+    .swipe-hint {
+        flex-direction: column;
+        gap: 5px;
     }
 }
