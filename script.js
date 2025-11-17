@@ -1,22 +1,40 @@
-// Gallery Data
+// Gallery Data dengan kategori
 const galleryImages = [
     {
-        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "romantic"
     },
     {
-        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "outdoor"
     },
     {
-        src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "casual"
     },
     {
-        src: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "romantic"
     },
     {
-        src: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "outdoor"
     },
     {
-        src: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+        src: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "casual"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "romantic"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1520637836861-8bfd2c226f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "outdoor"
+    },
+    {
+        src: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+        category: "casual"
     }
 ];
 
@@ -38,147 +56,72 @@ function initializeFeatherIcons() {
     feather.replace();
 }
 
-// Swipe Gallery Functionality
-let currentSlide = 0;
+// Collage Gallery Functionality
+let currentCategory = 'all';
 
-function initializeGallery() {
-    const galleryTrack = document.getElementById('galleryTrack');
-    const galleryNav = document.getElementById('galleryNav');
+function initializeCollageGallery() {
+    const collageGrid = document.getElementById('collageGrid');
+    const collageNav = document.getElementById('collageNav');
     
     // Clear existing content
-    galleryTrack.innerHTML = '';
-    galleryNav.innerHTML = '';
+    collageGrid.innerHTML = '';
+    collageNav.innerHTML = '';
     
-    // Create slides
-    galleryImages.forEach((image, index) => {
-        // Create slide
-        const slide = document.createElement('div');
-        slide.className = 'gallery-slide';
+    // Create category buttons
+    const categories = ['all', 'romantic', 'outdoor', 'casual'];
+    const categoryNames = {
+        'all': 'Semua',
+        'romantic': 'Romantis',
+        'outdoor': 'Outdoor',
+        'casual': 'Kasual'
+    };
+    
+    categories.forEach(category => {
+        const button = document.createElement('button');
+        button.className = `collage-btn ${category === 'all' ? 'active' : ''}`;
+        button.textContent = categoryNames[category];
+        button.setAttribute('data-category', category);
+        
+        button.addEventListener('click', () => {
+            filterGallery(category);
+            
+            // Update active button
+            document.querySelectorAll('.collage-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        });
+        
+        collageNav.appendChild(button);
+    });
+    
+    // Load initial images
+    filterGallery('all');
+}
+
+function filterGallery(category) {
+    const collageGrid = document.getElementById('collageGrid');
+    collageGrid.innerHTML = '';
+    
+    currentCategory = category;
+    
+    const filteredImages = category === 'all' 
+        ? galleryImages 
+        : galleryImages.filter(img => img.category === category);
+    
+    // Create collage items
+    filteredImages.forEach((image, index) => {
+        const collageItem = document.createElement('div');
+        collageItem.className = 'collage-item';
         
         const img = document.createElement('img');
         img.src = image.src;
         img.alt = "Foto Prewedding";
         img.loading = "lazy";
         
-        slide.appendChild(img);
-        galleryTrack.appendChild(slide);
-        
-        // Create navigation dot
-        const dot = document.createElement('div');
-        dot.className = 'gallery-dot';
-        if (index === 0) dot.classList.add('active');
-        dot.setAttribute('data-index', index);
-        galleryNav.appendChild(dot);
-        
-        // Add click event to dot
-        dot.addEventListener('click', () => {
-            goToSlide(index);
-        });
+        collageItem.appendChild(img);
+        collageGrid.appendChild(collageItem);
     });
-    
-    // Add event listeners to arrows
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        prevSlide();
-    });
-    
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        nextSlide();
-    });
-    
-    // Add swipe functionality
-    setupSwipeEvents();
-    
-    // Auto slide every 5 seconds
-    setInterval(() => {
-        nextSlide();
-    }, 5000);
-}
-
-function goToSlide(index) {
-    const galleryTrack = document.getElementById('galleryTrack');
-    const dots = document.querySelectorAll('.gallery-dot');
-    
-    // Update current slide
-    currentSlide = index;
-    
-    // Move track
-    galleryTrack.style.transform = `translateX(-${index * 100}%)`;
-    
-    // Update dots
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
-}
-
-function prevSlide() {
-    if (currentSlide > 0) {
-        goToSlide(currentSlide - 1);
-    } else {
-        goToSlide(galleryImages.length - 1); // Loop to last slide
-    }
-}
-
-function nextSlide() {
-    if (currentSlide < galleryImages.length - 1) {
-        goToSlide(currentSlide + 1);
-    } else {
-        goToSlide(0); // Loop to first slide
-    }
-}
-
-function setupSwipeEvents() {
-    const gallery = document.getElementById('swipeGallery');
-    let startX = 0;
-    let endX = 0;
-    
-    gallery.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-    
-    gallery.addEventListener('touchmove', (e) => {
-        endX = e.touches[0].clientX;
-    });
-    
-    gallery.addEventListener('touchend', () => {
-        const diffX = startX - endX;
-        const minSwipeDistance = 50; // Minimum distance for a swipe
-        
-        if (Math.abs(diffX) > minSwipeDistance) {
-            if (diffX > 0) {
-                // Swipe left - next slide
-                nextSlide();
-            } else {
-                // Swipe right - previous slide
-                prevSlide();
-            }
-        }
-    });
-    
-    // Also support mouse events for desktop
-    gallery.addEventListener('mousedown', (e) => {
-        startX = e.clientX;
-        gallery.addEventListener('mousemove', onMouseMove);
-        gallery.addEventListener('mouseup', onMouseUp);
-    });
-    
-    function onMouseMove(e) {
-        endX = e.clientX;
-    }
-    
-    function onMouseUp() {
-        const diffX = startX - endX;
-        const minSwipeDistance = 50;
-        
-        if (Math.abs(diffX) > minSwipeDistance) {
-            if (diffX > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-        }
-        
-        gallery.removeEventListener('mousemove', onMouseMove);
-        gallery.removeEventListener('mouseup', onMouseUp);
-    }
 }
 
 // Cover Front Functionality
@@ -222,8 +165,8 @@ function initializeMainContent() {
     // Initialize Feather Icons
     initializeFeatherIcons();
     
-    // Initialize gallery
-    initializeGallery();
+    // Initialize collage gallery
+    initializeCollageGallery();
     
     // Countdown timer
     function updateCountdown() {
