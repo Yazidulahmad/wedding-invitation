@@ -1,40 +1,22 @@
-// Gallery Data dengan kategori
+// Gallery Data
 const galleryImages = [
     {
-        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "romantic"
+        src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
-        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "outdoor"
+        src: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
-        src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "casual"
+        src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
-        src: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "romantic"
+        src: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
-        src: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "outdoor"
+        src: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     },
     {
-        src: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "casual"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "romantic"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1520637836861-8bfd2c226f39?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "outdoor"
-    },
-    {
-        src: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        category: "casual"
+        src: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
     }
 ];
 
@@ -57,60 +39,14 @@ function initializeFeatherIcons() {
 }
 
 // Collage Gallery Functionality
-let currentCategory = 'all';
-
 function initializeCollageGallery() {
     const collageGrid = document.getElementById('collageGrid');
-    const collageNav = document.getElementById('collageNav');
     
     // Clear existing content
     collageGrid.innerHTML = '';
-    collageNav.innerHTML = '';
-    
-    // Create category buttons
-    const categories = ['all', 'romantic', 'outdoor', 'casual'];
-    const categoryNames = {
-        'all': 'Semua',
-        'romantic': 'Romantis',
-        'outdoor': 'Outdoor',
-        'casual': 'Kasual'
-    };
-    
-    categories.forEach(category => {
-        const button = document.createElement('button');
-        button.className = `collage-btn ${category === 'all' ? 'active' : ''}`;
-        button.textContent = categoryNames[category];
-        button.setAttribute('data-category', category);
-        
-        button.addEventListener('click', () => {
-            filterGallery(category);
-            
-            // Update active button
-            document.querySelectorAll('.collage-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            button.classList.add('active');
-        });
-        
-        collageNav.appendChild(button);
-    });
-    
-    // Load initial images
-    filterGallery('all');
-}
-
-function filterGallery(category) {
-    const collageGrid = document.getElementById('collageGrid');
-    collageGrid.innerHTML = '';
-    
-    currentCategory = category;
-    
-    const filteredImages = category === 'all' 
-        ? galleryImages 
-        : galleryImages.filter(img => img.category === category);
     
     // Create collage items
-    filteredImages.forEach((image, index) => {
+    galleryImages.forEach((image, index) => {
         const collageItem = document.createElement('div');
         collageItem.className = 'collage-item';
         
@@ -160,6 +96,85 @@ function openInvitation() {
     initializeMainContent();
 }
 
+// Copy account number functionality
+function setupCopyButtons() {
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    
+    copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const accountNumber = this.getAttribute('data-account');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                showToast('Nomor rekening berhasil disalin!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showToast('Gagal menyalin nomor rekening');
+            });
+        });
+    });
+}
+
+// Bank app buttons functionality
+function setupBankAppButtons() {
+    const bankAppButtons = document.querySelectorAll('.bank-app-btn');
+    
+    bankAppButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const bank = this.getAttribute('data-bank');
+            let appUrl = '';
+            
+            // Define bank app URLs (these are example URLs)
+            if (bank === 'mandiri') {
+                appUrl = 'livin://'; // Livin by Mandiri
+            } else if (bank === 'bca') {
+                appUrl = 'bcamobile://'; // BCA Mobile
+            }
+            
+            // Try to open the app, if not available, open the website
+            window.location.href = appUrl;
+            
+            // Fallback to website after a delay
+            setTimeout(() => {
+                if (bank === 'mandiri') {
+                    window.open('https://www.bankmandiri.co.id/', '_blank');
+                } else if (bank === 'bca') {
+                    window.open('https://www.bca.co.id/', '_blank');
+                }
+            }, 500);
+        });
+    });
+}
+
+// Toast notification
+function showToast(message) {
+    // Remove existing toast if any
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    // Create new toast
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // Show toast
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    
+    // Hide toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }, 3000);
+}
+
 // Initialize main content functionality
 function initializeMainContent() {
     // Initialize Feather Icons
@@ -167,6 +182,12 @@ function initializeMainContent() {
     
     // Initialize collage gallery
     initializeCollageGallery();
+    
+    // Setup copy buttons
+    setupCopyButtons();
+    
+    // Setup bank app buttons
+    setupBankAppButtons();
     
     // Countdown timer
     function updateCountdown() {
@@ -280,10 +301,10 @@ function initializeMainContent() {
             
             document.getElementById('name').value = '';
             document.getElementById('message').value = '';
-            alert('Ucapan Anda telah terkirim! Terima kasih.');
+            showToast('Ucapan Anda telah terkirim! Terima kasih.');
             displayWishes();
         } else {
-            alert('Silakan isi nama dan ucapan Anda');
+            showToast('Silakan isi nama dan ucapan Anda');
         }
     }
 
