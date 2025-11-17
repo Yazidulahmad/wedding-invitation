@@ -25,7 +25,7 @@
         </div>
         
         <button class="open-invitation-btn" id="openInvitationBtn">
-            <i data-feather="heart" class="btn-icon"></i>
+            <i data-feather="mail" class="btn-icon"></i>
             Buka Undangan
         </button>
     </div>
@@ -97,9 +97,6 @@
                     <div class="collage-grid" id="collageGrid">
                         <!-- Gambar kolase akan ditambahkan oleh JavaScript -->
                     </div>
-                    <div class="collage-nav" id="collageNav">
-                        <!-- Tombol kategori akan ditambahkan oleh JavaScript -->
-                    </div>
                 </div>
             </div>
         </section>
@@ -127,14 +124,57 @@
                 <div class="envelope-container">
                     <p class="wedding-text">Doa restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
                     <p class="wedding-text">Jika berkenan, Anda dapat memberikan hadiah secara digital melalui:</p>
-                    <div style="margin: 15px 0;">
-                        <p class="wedding-text">
-                            <i data-feather="credit-card" class="text-icon"></i>
-                            <strong>Bank Mandiri</strong>
-                        </p>
-                        <p class="wedding-text">1234 5678 9012 3456</p>
-                        <p class="wedding-text">a.n. Ahmad Yazidul Jihad</p>
+                    
+                    <!-- Rekening Mempelai Pria -->
+                    <div class="bank-account">
+                        <h3 class="wedding-heading">Rekening Mempelai Pria</h3>
+                        <div class="account-details">
+                            <p class="wedding-text">
+                                <i data-feather="credit-card" class="text-icon"></i>
+                                <strong>Bank Mandiri</strong>
+                            </p>
+                            <div class="account-number">
+                                <p class="wedding-text">1234 5678 9012 3456</p>
+                                <div class="account-actions">
+                                    <button class="copy-btn" data-account="1234567890123456">
+                                        <i data-feather="copy" class="btn-icon"></i>
+                                        Salin
+                                    </button>
+                                    <button class="bank-app-btn" data-bank="mandiri">
+                                        <i data-feather="external-link" class="btn-icon"></i>
+                                        Buka Mandiri
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="wedding-text">a.n. Ahmad Yazidul Jihad</p>
+                        </div>
                     </div>
+                    
+                    <!-- Rekening Mempelai Wanita -->
+                    <div class="bank-account">
+                        <h3 class="wedding-heading">Rekening Mempelai Wanita</h3>
+                        <div class="account-details">
+                            <p class="wedding-text">
+                                <i data-feather="credit-card" class="text-icon"></i>
+                                <strong>Bank BCA</strong>
+                            </p>
+                            <div class="account-number">
+                                <p class="wedding-text">5678 9012 3456 7890</p>
+                                <div class="account-actions">
+                                    <button class="copy-btn" data-account="5678901234567890">
+                                        <i data-feather="copy" class="btn-icon"></i>
+                                        Salin
+                                    </button>
+                                    <button class="bank-app-btn" data-bank="bca">
+                                        <i data-feather="external-link" class="btn-icon"></i>
+                                        Buka BCA
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="wedding-text">a.n. Hartini</p>
+                        </div>
+                    </div>
+                    
                     <p class="wedding-text">Terima kasih atas segala kebaikan dan perhatiannya.</p>
                 </div>
             </div>
